@@ -437,8 +437,60 @@ export default function App() {
 
         <ActionButton
           title="Manage Dishes"
-          onPress={() => setScreen('ManageMenu')}
+          onPress={() => setScreen('ManageMenu')}  
         />
       </ScrollView>
     );
   }
+
+// MAIN APP LAYOUT
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.logo}>CHEF'S</Text>
+        <Text style={styles.logoSubtitle}>PRIVATE MENU</Text>
+      </View>
+
+      <View style={styles.content}>
+        {screen === 'Dashboard' && <Dashboard />}
+        {screen === 'AddDish' && <AddDish />}
+        {screen === 'ManageMenu' && <ManageMenu />}
+        {screen === 'ViewMenu' && <ViewMenu />}
+      </View>
+
+      <View style={styles.bottomNav}>
+        <Pressable onPress={() => setScreen('Dashboard')}>
+          <Text style={[
+            styles.navText,
+            screen === 'Dashboard' && styles.activeNav,
+          ]}>
+            Home
+          </Text>
+        </Pressable>
+
+        <Pressable onPress={() => setScreen('ManageMenu')}>
+          <Text style={[
+            styles.navText,
+            screen === 'ManageMenu' && styles.activeNav,
+          ]}>
+            Manage
+          </Text>
+        </Pressable>
+
+        <Pressable onPress={() => setScreen('ViewMenu')}>
+          <Text style={[
+            styles.navText,
+            screen === 'ViewMenu' && styles.activeNav,
+          ]}>
+            View Menu
+          </Text>
+        </Pressable>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+
+
+
