@@ -63,6 +63,70 @@ export default function App() {
     };
   });
 
+// FORM FUNCTIONS
+
+  function resetForm() {
+    setDishName('');
+    setDescription('');
+    setCourse('Starter');
+    setPrice('');
+    setCurrency('R');
+    setEditingId(null);
+  }
+
+  function openAddDish() {
+    resetForm();
+    setScreen('AddDish');
+  }
+
+  function openEditDish(dish) {
+    setDishName(dish.name);
+    setDescription(dish.description);
+    setCourse(dish.course);
+    setPrice(String(dish.price));
+    setCurrency(dish.currency);
+    setEditingId(dish.id);
+    setScreen('AddDish');
+  }
+
+  function saveDish() {
+    if (!dishName.trim() || !description.trim() || !price.trim()) {
+      Alert.alert('Missing Information', 'Please complete all fields.');
+      return;
+    }
+
+    const cleanPrice = Number(price.replace(',', '.'));
+
+    if (!Number.isFinite(cleanPrice) || cleanPrice <= 0) {
+      Alert.alert('Invalid Price', 'Please enter a valid price greater than zero.');
+      return;
+    }
+
+    const dishData = {
+      id: editingId || Date.now().toString(),
+      name: dishName.trim(),
+      description: description.trim(),
+      course,
+      price: cleanPrice,
+      currency,
+    };
+
+    if (editingId) {
+      setDishes(previous =>
+        previous.map(d => d.id === editingId ? dishData : d)
+      );
+
+      Alert.alert('Success', 'Dish updated successfully!');
+    } else {
+      setDishes(previous => [...previous, dishData]);
+
+      Alert.alert('Success', 'Dish added successfully!');
+    }
+
+    resetForm();
+    setScreen(editingId ? 'ManageMenu' : 'Dashboard');
+  }
+  
 // MANAGE MENU
 if (screen === 'manage') {
   return (
