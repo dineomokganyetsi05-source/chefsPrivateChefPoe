@@ -170,6 +170,28 @@ export default function App() {
     setSearch('');
     setFilterCourse('All');
   }
+
+ // REUSABLE BUTTON
+
+  function ActionButton({ title, onPress, secondary, danger }) {
+    return (
+      <Pressable
+        style={[
+          styles.button,
+          secondary && styles.secondaryButton,
+          danger && styles.dangerButton,
+        ]}
+        onPress={onPress}
+      >
+        <Text style={[
+          styles.buttonText,
+          secondary && styles.secondaryText,
+        ]}>
+          {title}
+        </Text>
+      </Pressable>
+    );
+  }
   
 // MANAGE MENU
 if (screen === 'manage') {
