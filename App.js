@@ -260,6 +260,77 @@ export default function App() {
     );
   }
 
+
+// DASHBOARD SCREEN
+
+  function Dashboard() {
+    return (
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={styles.welcome}>Welcome, Chef!</Text>
+        <Text style={styles.subtitle}>
+          Manage your private restaurant menu.
+        </Text>
+
+        <View style={styles.statCard}>
+          <Text style={styles.statLabel}>TOTAL MENU ITEMS</Text>
+          <Text style={styles.statNumber}>{totalDishes}</Text>
+          <Text style={styles.statDescription}>
+            Dishes currently on your menu
+          </Text>
+        </View>
+
+        <Text style={styles.sectionTitle}>Average Prices</Text>
+
+        <View style={styles.averageContainer}>
+          {averagePrices.map(item => (
+            <View key={item.currency} style={styles.averageCard}>
+              <Text style={styles.averageCurrency}>
+                {item.currency}
+              </Text>
+              <Text style={styles.averageValue}>
+                {item.count > 0 ? item.average : '0.00'}
+              </Text>
+              <Text style={styles.mutedText}>
+                {item.count} item(s)
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        <Text style={styles.sectionTitle}>Items Per Course</Text>
+
+        {COURSES.map(item => (
+          <View key={item} style={styles.courseStat}>
+            <Text style={styles.courseStatName}>
+              {item === 'Main' ? 'Main Course' : item + 's'}
+            </Text>
+            <Text style={styles.courseStatNumber}>
+              {courseCounts[item]}
+            </Text>
+          </View>
+        ))}
+
+        <Text style={styles.sectionTitle}>Menu Management</Text>
+
+        <ActionButton
+          title="+ Add New Dish"
+          onPress={openAddDish}
+        />
+
+        <ActionButton
+          title="Manage Menu"
+          secondary
+          onPress={() => setScreen('ManageMenu')}
+        />
+
+        <ActionButton
+          title="View Menu"
+          secondary
+          onPress={() => setScreen('ViewMenu')}
+        />
+      </ScrollView>
+    );
+  }
 // MANAGE MENU
 if (screen === 'manage') {
   return (
