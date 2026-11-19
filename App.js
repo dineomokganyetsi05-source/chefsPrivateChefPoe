@@ -126,6 +126,32 @@ export default function App() {
     resetForm();
     setScreen(editingId ? 'ManageMenu' : 'Dashboard');
   }
+
+ // DELETE FUNCTION
+
+  function deleteDish(id) {
+    Alert.alert(
+      'Delete Dish',
+      'Are you sure you want to delete this dish?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            setDishes(previous =>
+              previous.filter(d => d.id !== id)
+            );
+
+            Alert.alert('Deleted', 'Dish removed successfully.');
+          },
+        },
+      ]
+    );
+  }
   
 // MANAGE MENU
 if (screen === 'manage') {
