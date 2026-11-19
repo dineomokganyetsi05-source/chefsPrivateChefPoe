@@ -192,6 +192,32 @@ export default function App() {
       </Pressable>
     );
   }
+
+// REUSABLE COURSE SELECTOR
+
+  function CourseSelector() {
+    return (
+      <View style={styles.optionContainer}>
+        {COURSES.map(item => (
+          <Pressable
+            key={item}
+            onPress={() => setCourse(item)}
+            style={[
+              styles.option,
+              course === item && styles.selectedOption,
+            ]}
+          >
+            <Text style={[
+              styles.optionText,
+              course === item && styles.selectedOptionText,
+            ]}>
+              {item}
+            </Text>
+          </Pressable>
+        ))}
+      </View>
+    );
+  }
   
 // MANAGE MENU
 if (screen === 'manage') {
