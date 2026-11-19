@@ -50,10 +50,19 @@ export default function App() {
   };
 
   const averagePrices = CURRENCIES.map(symbol => {
-    const items = dishes.filter(d => d.currency === symbol);
+    const items = dishes.filter(
+      dish =>
+        dish.currency === symbol &&
+        Number.isFinite(Number(dish.price))
+    );
 
-    const average = items.length
-      ? items.reduce((sum, d) => sum + Number(d.price), 0) / items.length
+    const totalPrice = items.reduce(
+      (sum, dish) => sum + Number(dish.price),
+      0
+    );
+
+    const average = items.length > 0
+      ? totalPrice / items.length
       : 0;
 
     return {
@@ -98,9 +107,14 @@ export default function App() {
     const cleanPrice = Number(price.replace(',', '.'));
 
     if (!Number.isFinite(cleanPrice) || cleanPrice <= 0) {
-      Alert.alert('Invalid Price', 'Please enter a valid price greater than zero.');
+      Alert.alert(
+        'Invalid Price',
+        'Please enter a valid price greater than zero.'
+      );
       return;
     }
+
+    const wasEditing = Boolean(editingId);
 
     const dishData = {
       id: editingId || Date.now().toString(),
@@ -111,9 +125,11 @@ export default function App() {
       currency,
     };
 
-    if (editingId) {
+    if (wasEditing) {
       setDishes(previous =>
-        previous.map(d => d.id === editingId ? dishData : d)
+        previous.map(dish =>
+          dish.id === editingId ? dishData : dish
+        )
       );
 
       Alert.alert('Success', 'Dish updated successfully!');
@@ -124,7 +140,7 @@ export default function App() {
     }
 
     resetForm();
-    setScreen(editingId ? 'ManageMenu' : 'Dashboard');
+    setScreen(wasEditing ? 'ManageMenu' : 'Dashboard');
   }
 
   // DELETE FUNCTION
@@ -142,14 +158,22 @@ export default function App() {
           text: 'Delete',
           style: 'destructive',
           onPress: () => {
-            setDishes(previous =>
-              previous.filter(d => d.id !== id)
-            );
+            setDishes(previousDishes => {
+              const updatedDishes = previousDishes.filter(
+                dish => String(dish.id) !== String(id)
+              );
 
-            Alert.alert('Deleted', 'Dish removed successfully.');
+              return updatedDishes;
+            });
+
+            Alert.alert(
+              'Success',
+              'Dish deleted successfully!'
+            );
           },
         },
-      ]
+      ],
+      { cancelable: true }
     );
   }
 
@@ -287,7 +311,7 @@ export default function App() {
                 {item.currency}
               </Text>
               <Text style={styles.averageValue}>
-                {item.count > 0 ? item.average : '0.00'}
+                {item.average}
               </Text>
               <Text style={styles.mutedText}>
                 {item.count} item(s)
@@ -407,8 +431,9 @@ export default function App() {
             title="Cancel"
             secondary
             onPress={() => {
+              const wasEditing = Boolean(editingId);
               resetForm();
-              setScreen(editingId ? 'ManageMenu' : 'Dashboard');
+              setScreen(wasEditing ? 'ManageMenu' : 'Dashboard');
             }}
           />
         </ScrollView>
