@@ -218,7 +218,48 @@ export default function App() {
       </View>
     );
   }
-  
+
+// REUSABLE DISH CARD
+
+  function DishCard({ dish, showActions = false }) {
+    return (
+      <View style={styles.dishCard}>
+        <View style={styles.dishHeader}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.dishName}>{dish.name}</Text>
+            <Text style={styles.courseLabel}>{dish.course}</Text>
+          </View>
+
+          <Text style={styles.dishPrice}>
+            {dish.currency}{Number(dish.price).toFixed(2)}
+          </Text>
+        </View>
+
+        <Text style={styles.dishDescription}>
+          {dish.description}
+        </Text>
+
+        {showActions && (
+          <View style={styles.actionRow}>
+            <Pressable
+              style={styles.smallButton}
+              onPress={() => openEditDish(dish)}
+            >
+              <Text style={styles.smallButtonText}>Edit</Text>
+            </Pressable>
+
+            <Pressable
+              style={[styles.smallButton, styles.deleteButton]}
+              onPress={() => deleteDish(dish.id)}
+            >
+              <Text style={styles.smallButtonText}>Delete</Text>
+            </Pressable>
+          </View>
+        )}
+      </View>
+    );
+  }
+
 // MANAGE MENU
 if (screen === 'manage') {
   return (
