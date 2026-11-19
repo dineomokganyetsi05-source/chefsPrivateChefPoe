@@ -11,6 +11,16 @@ import {
 } from 'react-native';
 
 export default function App() {
+  const filteredMenuItems = menuItems.filter(item => {
+  const matchesSearch = item.name
+    .toLowerCase()
+    .includes(searchText.toLowerCase());
+
+  const matchesCourse =
+    filterCourse === 'All' || item.course === filterCourse;
+
+  return matchesSearch && matchesCourse;
+});
 
   const [screen, setScreen] = useState('dashboard');
   const [menuItems, setMenuItems] = useState([]);
@@ -21,6 +31,7 @@ export default function App() {
   const [currency, setCurrency] = useState('R');
   const [editingDish, setEditingDish] = useState(null);
   const [searchText, setSearchText] = useState('');
+  const [filterCourse, setFilterCourse] = useState('All');
   // DASHBOARD
   if (screen === 'dashboard') {
     return (
