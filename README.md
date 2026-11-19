@@ -1,11 +1,51 @@
-# Sample Snack app
+Chef’s Private Menu – Part 3 Changelog
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+Part 3 builds on the previous version of Chef’s Private Menu by improving menu management, search and filtering, dashboard statistics, code organisation and user experience.
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+Changes and Improvements
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+1. Menu Management
+
+Improved the functionality for adding new dishes.
+Added the ability to edit existing dishes.
+Improved the process of updating dish information.
+Added dish deletion with confirmation.
+Improved form validation to prevent incomplete or invalid entries.
+
+2. Search and Filtering
+
+Added search functionality to find dishes by name.
+Added course filtering for Starter, Main and Dessert.
+Added an option to clear search and filter selections.
+Added a results counter to display the number of matching dishes.
+
+3. Dashboard Statistics
+
+Added a total menu item counter.
+Added statistics showing the number of dishes in each course.
+Added average price calculations grouped by currency.
+
+4. Code Organisation
+
+Introduced reusable ActionButton components.
+Introduced a reusable CourseSelector component.
+Introduced a reusable DishCard component.
+Improved code structure and readability.
+
+5. User Experience
+
+Improved feedback messages using alerts.
+Added empty search result messages.
+Improved navigation between application screens.
+Improved the overall menu management interface.
+
+
+A video demonstration of the working Chef’s Private Menu application 
+
+Video demonstration: https://youtube.com/shorts/ZdJpb8ZYF24?si=ZEJjFvnDjQ0awFfy
+
+Conclusion
+
+Part 3 improves the functionality and usability of Chef’s Private Menu while building on the features developed in Part 2.
