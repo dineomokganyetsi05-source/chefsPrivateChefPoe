@@ -491,6 +491,329 @@ export default function App() {
   );
 }
 
+// APP STYLING
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.black,
+  },
+
+  header: {
+    alignItems: 'center',
+    paddingVertical: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: '#353535',
+  },
+
+  logo: {
+    color: COLORS.gold,
+    fontSize: 25,
+    fontWeight: 'bold',
+    letterSpacing: 4,
+  },
+
+  logoSubtitle: {
+    color: COLORS.white,
+    fontSize: 11,
+    letterSpacing: 3,
+    marginTop: 3,
+  },
+
+  content: {
+    flex: 1,
+    padding: 18,
+  },
+
+  welcome: {
+    color: COLORS.white,
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+
+  subtitle: {
+    color: COLORS.grey,
+    fontSize: 14,
+    marginTop: 7,
+    marginBottom: 18,
+  },
+
+  sectionTitle: {
+    color: COLORS.gold,
+    fontSize: 21,
+    fontWeight: 'bold',
+    marginTop: 18,
+    marginBottom: 14,
+  },
+
+  statCard: {
+    backgroundColor: COLORS.charcoal,
+    borderWidth: 1,
+    borderColor: COLORS.gold,
+    borderRadius: 12,
+    padding: 20,
+    marginTop: 15,
+  },
+
+  statLabel: {
+    color: COLORS.grey,
+    fontSize: 12,
+    letterSpacing: 2,
+  },
+
+  statNumber: {
+    color: COLORS.gold,
+    fontSize: 42,
+    fontWeight: 'bold',
+    marginVertical: 5,
+  },
+
+  statDescription: {
+    color: COLORS.white,
+    fontSize: 13,
+  },
+
+  averageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 7,
+  },
+
+  averageCard: {
+    flex: 1,
+    backgroundColor: COLORS.charcoal,
+    padding: 12,
+    borderRadius: 9,
+    alignItems: 'center',
+  },
+
+  averageCurrency: {
+    color: COLORS.gold,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
+  averageValue: {
+    color: COLORS.white,
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
+
+  mutedText: {
+    color: COLORS.grey,
+    fontSize: 10,
+    marginTop: 5,
+  },
+
+  courseStat: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: COLORS.charcoal,
+    padding: 15,
+    marginBottom: 8,
+    borderRadius: 8,
+  },
+
+  courseStatName: {
+    color: COLORS.white,
+    fontSize: 15,
+  },
+
+  courseStatNumber: {
+    color: COLORS.gold,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+
+  button: {
+    backgroundColor: COLORS.gold,
+    padding: 15,
+    borderRadius: 9,
+    alignItems: 'center',
+    marginVertical: 7,
+  },
+
+  secondaryButton: {
+    backgroundColor: COLORS.charcoal,
+    borderWidth: 1,
+    borderColor: COLORS.gold,
+  },
+
+  dangerButton: {
+    backgroundColor: COLORS.red,
+  },
+
+  buttonText: {
+    color: COLORS.black,
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+
+  secondaryText: {
+    color: COLORS.gold,
+  },
+
+  inputLabel: {
+    color: COLORS.gold,
+    fontSize: 14,
+    marginTop: 16,
+    marginBottom: 8,
+  },
+
+  input: {
+    backgroundColor: COLORS.charcoal,
+    borderWidth: 1,
+    borderColor: '#454545',
+    borderRadius: 8,
+    padding: 14,
+    color: COLORS.white,
+    fontSize: 15,
+  },
+
+  descriptionInput: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+
+  optionContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 7,
+  },
+
+  option: {
+    backgroundColor: COLORS.charcoal,
+    borderWidth: 1,
+    borderColor: '#454545',
+    borderRadius: 8,
+    paddingVertical: 11,
+    paddingHorizontal: 13,
+  },
+
+  selectedOption: {
+    backgroundColor: COLORS.gold,
+    borderColor: COLORS.gold,
+  },
+
+  optionText: {
+    color: COLORS.white,
+    fontSize: 13,
+  },
+
+  selectedOptionText: {
+    color: COLORS.black,
+    fontWeight: 'bold',
+  },
+
+  resultText: {
+    color: COLORS.grey,
+    marginVertical: 12,
+    fontSize: 13,
+  },
+
+  dishCard: {
+    backgroundColor: COLORS.charcoal,
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#383838',
+  },
+
+  dishHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  dishName: {
+    color: COLORS.white,
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+
+  courseLabel: {
+    color: COLORS.gold,
+    fontSize: 12,
+    marginTop: 4,
+  },
+
+  dishPrice: {
+    color: COLORS.gold,
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+
+  dishDescription: {
+    color: COLORS.grey,
+    fontSize: 13,
+    marginTop: 12,
+    lineHeight: 20,
+  },
+
+  actionRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 15,
+  },
+
+  smallButton: {
+    backgroundColor: COLORS.gold,
+    paddingVertical: 9,
+    paddingHorizontal: 20,
+    borderRadius: 6,
+  },
+
+  deleteButton: {
+    backgroundColor: COLORS.red,
+  },
+
+  smallButtonText: {
+    color: COLORS.white,
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+
+  emptyText: {
+    color: COLORS.grey,
+    textAlign: 'center',
+    padding: 20,
+    fontSize: 13,
+  },
+
+  menuHeading: {
+    color: COLORS.gold,
+    fontSize: 19,
+    fontWeight: 'bold',
+    marginTop: 22,
+    marginBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.gold,
+    paddingBottom: 8,
+  },
+
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: COLORS.charcoal,
+    paddingVertical: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#383838',
+  },
+
+  navText: {
+    color: COLORS.grey,
+    fontSize: 13,
+    fontWeight: '600',
+  },
+
+  activeNav: {
+    color: COLORS.gold,
+  },
+});
+
 
 
 
