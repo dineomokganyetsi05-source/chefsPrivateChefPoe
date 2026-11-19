@@ -39,7 +39,7 @@ export default function App() {
   const [search, setSearch] = useState('');
   const [filterCourse, setFilterCourse] = useState('All');
 
- // DASHBOARD STATISTICS
+  // DASHBOARD STATISTICS
 
   const totalDishes = dishes.length;
 
@@ -63,7 +63,7 @@ export default function App() {
     };
   });
 
-// FORM FUNCTIONS
+  // FORM FUNCTIONS
 
   function resetForm() {
     setDishName('');
@@ -127,7 +127,7 @@ export default function App() {
     setScreen(editingId ? 'ManageMenu' : 'Dashboard');
   }
 
- // DELETE FUNCTION
+  // DELETE FUNCTION
 
   function deleteDish(id) {
     Alert.alert(
@@ -153,7 +153,7 @@ export default function App() {
     );
   }
 
-// SEARCH AND FILTER
+  // SEARCH AND FILTER
 
   const filteredDishes = dishes.filter(dish => {
     const matchesSearch = dish.name
@@ -171,7 +171,7 @@ export default function App() {
     setFilterCourse('All');
   }
 
- // REUSABLE BUTTON
+  // REUSABLE BUTTON
 
   function ActionButton({ title, onPress, secondary, danger }) {
     return (
@@ -193,7 +193,7 @@ export default function App() {
     );
   }
 
-// REUSABLE COURSE SELECTOR
+  // REUSABLE COURSE SELECTOR
 
   function CourseSelector() {
     return (
@@ -219,7 +219,7 @@ export default function App() {
     );
   }
 
-// REUSABLE DISH CARD
+  // REUSABLE DISH CARD
 
   function DishCard({ dish, showActions = false }) {
     return (
@@ -260,8 +260,7 @@ export default function App() {
     );
   }
 
-
-// DASHBOARD SCREEN
+  // DASHBOARD SCREEN
 
   function Dashboard() {
     return (
@@ -332,7 +331,92 @@ export default function App() {
     );
   }
 
- // MANAGE MENU SCREEN
+  // ADD AND EDIT SCREEN
+
+  function AddDish() {
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}
+      >
+        <ScrollView keyboardShouldPersistTaps="handled">
+          <Text style={styles.sectionTitle}>
+            {editingId ? 'Edit Dish' : 'Add New Dish'}
+          </Text>
+
+          <Text style={styles.inputLabel}>Dish Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter dish name"
+            placeholderTextColor={COLORS.grey}
+            value={dishName}
+            onChangeText={setDishName}
+          />
+
+          <Text style={styles.inputLabel}>Description</Text>
+          <TextInput
+            style={[styles.input, styles.descriptionInput]}
+            placeholder="Describe your dish"
+            placeholderTextColor={COLORS.grey}
+            value={description}
+            onChangeText={setDescription}
+            multiline
+          />
+
+          <Text style={styles.inputLabel}>Course</Text>
+          <CourseSelector />
+
+          <Text style={styles.inputLabel}>Price</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter price"
+            placeholderTextColor={COLORS.grey}
+            value={price}
+            onChangeText={setPrice}
+            keyboardType="decimal-pad"
+          />
+
+          <Text style={styles.inputLabel}>Currency</Text>
+
+          <View style={styles.optionContainer}>
+            {CURRENCIES.map(item => (
+              <Pressable
+                key={item}
+                onPress={() => setCurrency(item)}
+                style={[
+                  styles.option,
+                  currency === item && styles.selectedOption,
+                ]}
+              >
+                <Text style={[
+                  styles.optionText,
+                  currency === item && styles.selectedOptionText,
+                ]}>
+                  {item}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+
+          <ActionButton
+            title={editingId ? 'Update Dish' : 'Save Dish'}
+            onPress={saveDish}
+          />
+
+          <ActionButton
+            title="Cancel"
+            secondary
+            onPress={() => {
+              resetForm();
+              setScreen(editingId ? 'ManageMenu' : 'Dashboard');
+            }}
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
+    );
+  }
+
+  // MANAGE MENU SCREEN
 
   function ManageMenu() {
     return (
@@ -401,7 +485,7 @@ export default function App() {
     );
   }
 
-// VIEW MENU SCREEN
+  // VIEW MENU SCREEN
 
   function ViewMenu() {
     return (
@@ -437,13 +521,13 @@ export default function App() {
 
         <ActionButton
           title="Manage Dishes"
-          onPress={() => setScreen('ManageMenu')}  
+          onPress={() => setScreen('ManageMenu')}
         />
       </ScrollView>
     );
   }
 
-// MAIN APP LAYOUT
+  // MAIN APP LAYOUT
 
   return (
     <SafeAreaView style={styles.container}>
@@ -813,7 +897,3 @@ const styles = StyleSheet.create({
     color: COLORS.gold,
   },
 });
-
-
-
-
