@@ -8,30 +8,37 @@ import {
   SafeAreaView,
   ScrollView,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 
+const COLORS = {
+  black: '#0B0B0B',
+  charcoal: '#151515',
+  card: '#202020',
+  gold: '#D4B76A',
+  white: '#FFFFFF',
+  grey: '#A0A0A0',
+  red: '#D9534F',
+};
+
+const COURSES = ['Starter', 'Main', 'Dessert'];
+const CURRENCIES = ['R', '$', '£'];
+
 export default function App() {
-  const filteredMenuItems = menuItems.filter(item => {
-  const matchesSearch = item.name
-    .toLowerCase()
-    .includes(searchText.toLowerCase());
+  const [screen, setScreen] = useState('Dashboard');
+  const [dishes, setDishes] = useState([]);
 
-  const matchesCourse =
-    filterCourse === 'All' || item.course === filterCourse;
-
-  return matchesSearch && matchesCourse;
-});
-
-  const [screen, setScreen] = useState('dashboard');
-  const [menuItems, setMenuItems] = useState([]);
   const [dishName, setDishName] = useState('');
   const [description, setDescription] = useState('');
-  const [course, setCourse] = useState('');
+  const [course, setCourse] = useState('Starter');
   const [price, setPrice] = useState('');
   const [currency, setCurrency] = useState('R');
-  const [editingDish, setEditingDish] = useState(null);
-  const [searchText, setSearchText] = useState('');
+  const [editingId, setEditingId] = useState(null);
+
+  const [search, setSearch] = useState('');
   const [filterCourse, setFilterCourse] = useState('All');
+
   // DASHBOARD
   if (screen === 'dashboard') {
     return (
