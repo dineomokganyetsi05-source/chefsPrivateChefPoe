@@ -39,78 +39,30 @@ export default function App() {
   const [search, setSearch] = useState('');
   const [filterCourse, setFilterCourse] = useState('All');
 
-  // DASHBOARD
-  if (screen === 'dashboard') {
-    return (
-      <SafeAreaView style={styles.container}>
+ // DASHBOARD STATISTICS
 
-        <View style={styles.header}>
-          <Text style={styles.title}>CHEFS</Text>
-          <Text style={styles.title}>PRIVATE MENU</Text>
-          <Text style={styles.subtitle}>THE KITCHEN</Text>
-        </View>
+  const totalDishes = dishes.length;
 
-        <View style={styles.statsContainer}>
+  const courseCounts = {
+    Starter: dishes.filter(d => d.course === 'Starter').length,
+    Main: dishes.filter(d => d.course === 'Main').length,
+    Dessert: dishes.filter(d => d.course === 'Dessert').length,
+  };
 
-  <View style={styles.statBox}>
-    <Text style={styles.number}>
-      {menuItems.filter(item => item.course === 'Starter').length}
-    </Text>
-    <Text style={styles.statText}>STARTERS</Text>
-  </View>
+  const averagePrices = CURRENCIES.map(symbol => {
+    const items = dishes.filter(d => d.currency === symbol);
 
-  <View style={styles.statBox}>
-    <Text style={styles.number}>
-      {menuItems.filter(item => item.course === 'Main').length}
-    </Text>
-    <Text style={styles.statText}>MAINS</Text>
-  </View>
+    const average = items.length
+      ? items.reduce((sum, d) => sum + Number(d.price), 0) / items.length
+      : 0;
 
-  <View style={styles.statBox}>
-    <Text style={styles.number}>
-      {menuItems.filter(item => item.course === 'Dessert').length}
-    </Text>
-    <Text style={styles.statText}>DESSERTS</Text>
-  </View>
+    return {
+      currency: symbol,
+      average: average.toFixed(2),
+      count: items.length,
+    };
+  });
 
-
-        </View>
-
-        <View style={styles.buttons}>
-
-          <Pressable
-            style={styles.button}
-            onPress={() => setScreen('add')}
-          >
-            <Text style={styles.buttonText}>＋ ADD DISH</Text>
-          </Pressable>
-
-          <Pressable
-         style={styles.button}
-         onPress={() => setScreen('manage')}
->
-              <Text style={styles.buttonText}>MANAGE MENU</Text>
-          </Pressable>
-
-          <Pressable
-            style={styles.button}
-            onPress={() => setScreen('view')}
->
-               <Text style={styles.buttonText}>VIEW MENU</Text>
-          </Pressable>
-
-        </View>
-
-        <View style={styles.bottomNav}>
-          <Text style={styles.navText}>⌂</Text>
-          <Text style={styles.navText}>＋</Text>
-          <Text style={styles.navText}>☷</Text>
-          <Text style={styles.navText}>▣</Text>
-        </View>
-
-      </SafeAreaView>
-    );
-  }
 // MANAGE MENU
 if (screen === 'manage') {
   return (
