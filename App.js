@@ -331,106 +331,76 @@ export default function App() {
       </ScrollView>
     );
   }
-// MANAGE MENU
-if (screen === 'manage') {
-  return (
-    <SafeAreaView style={styles.container}>
 
-      <Pressable onPress={() => setScreen('dashboard')}>
-        <Text style={styles.back}>‹ BACK</Text>
-      </Pressable>
+ // MANAGE MENU SCREEN
 
-      <Text style={styles.pageTitle}>MANAGE MENU</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Search dishes..."
-        placeholderTextColor="#777"
-        value={searchText}
-        onChangeText={setSearchText}
-       />
+  function ManageMenu() {
+    return (
+      <ScrollView keyboardShouldPersistTaps="handled">
+        <Text style={styles.sectionTitle}>Manage Menu</Text>
 
-      <ScrollView>
+        <TextInput
+          style={styles.input}
+          placeholder="Search by dish name..."
+          placeholderTextColor={COLORS.grey}
+          value={search}
+          onChangeText={setSearch}
+        />
 
-        {menuItems.length === 0 ? (
+        <Text style={styles.inputLabel}>Filter by Course</Text>
 
-          <View style={styles.emptyBox}>
-            <Text style={styles.emptyTitle}>YOUR MENU</Text>
-
-            <Text style={styles.emptyText}>
-              No dishes have been added yet.
-            </Text>
-
+        <View style={styles.optionContainer}>
+          {['All', ...COURSES].map(item => (
             <Pressable
-              style={styles.saveButton}
-              onPress={() => setScreen('add')}
+              key={item}
+              onPress={() => setFilterCourse(item)}
+              style={[
+                styles.option,
+                filterCourse === item && styles.selectedOption,
+              ]}
             >
-              <Text style={styles.saveText}>
-                ＋ ADD YOUR FIRST DISH
+              <Text style={[
+                styles.optionText,
+                filterCourse === item && styles.selectedOptionText,
+              ]}>
+                {item}
               </Text>
             </Pressable>
-          </View>
+          ))}
+        </View>
 
+        <ActionButton
+          title="Clear Filters"
+          secondary
+          onPress={clearFilters}
+        />
+
+        <Text style={styles.resultText}>
+          Showing {filteredDishes.length} of {totalDishes} dishes
+        </Text>
+
+        <ActionButton
+          title="+ Add New Dish"
+          onPress={openAddDish}
+        />
+
+        {filteredDishes.length === 0 ? (
+          <Text style={styles.emptyText}>
+            No dishes found. Try changing your search or filter.
+          </Text>
         ) : (
-
-          menuItems
-           .filter(item =>
-           item.name.toLowerCase().includes(searchText.toLowerCase())
-         )
-       .map(item => (
-
-            <View style={styles.menuCard} key={item.id}>
-
-              <Text style={styles.dishName}>
-                {item.name}
-              </Text>
-
-              <Text style={styles.dishDescription}>
-                {item.description}
-              </Text>
-
-              <Text style={styles.menuCourse}>
-                {item.course}
-              </Text>
-
-              <Text style={styles.dishPrice}>
-                {item.currency}{item.price}
-              </Text>
-
-   <Pressable
-     style={styles.editButton}
-      onPress={() => {
-    setEditingDish(item);
-    setDishName(item.name);
-    setDescription(item.description);
-    setCourse(item.course);
-    setPrice(item.price);
-    setCurrency(item.currency);
-    setScreen('add');
-  }}
->
-  <Text style={styles.editText}>EDIT</Text>
-</Pressable>
-<Pressable
-  style={styles.deleteButton}
-  onPress={() => {
-    setMenuItems(
-      menuItems.filter(dish => dish.id !== item.id)
-    );
-  }}
->
-  <Text style={styles.deleteText}>DELETE</Text>
-</Pressable>
-            </View>
-
+          filteredDishes.map(dish => (
+            <DishCard
+              key={dish.id}
+              dish={dish}
+              showActions
+            />
           ))
-
         )}
-
       </ScrollView>
+    );
+  }
 
-    </SafeAreaView>
-  );
-}
 // VIEW MENU
 if (screen === 'view') {
   return (
