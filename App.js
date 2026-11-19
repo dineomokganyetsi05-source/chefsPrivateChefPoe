@@ -152,6 +152,24 @@ export default function App() {
       ]
     );
   }
+
+// SEARCH AND FILTER
+
+  const filteredDishes = dishes.filter(dish => {
+    const matchesSearch = dish.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesCourse =
+      filterCourse === 'All' || dish.course === filterCourse;
+
+    return matchesSearch && matchesCourse;
+  });
+
+  function clearFilters() {
+    setSearch('');
+    setFilterCourse('All');
+  }
   
 // MANAGE MENU
 if (screen === 'manage') {
